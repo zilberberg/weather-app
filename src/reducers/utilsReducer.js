@@ -1,6 +1,21 @@
 import {  } from "../constants/favoritesConstants";
 
 let initialState = {
+    locationDetails: {
+        Version: 1,
+        Key: 215854,
+        Type: "City",
+        Rank: 31,
+        LocalizedName: "Tel Aviv",
+        Country: {
+          ID: "IL",
+          LocalizedName: "Israel"
+        },
+        AdministrativeArea: {
+          ID: "TA",
+          LocalizedName: "Tel Aviv"
+        }
+    },
     currentWeather: {
         LocalObservationDateTime: "2021-04-08T17:25:00+03:00",
         EpochTime: 1617891900,

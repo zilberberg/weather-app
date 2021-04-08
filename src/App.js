@@ -30,14 +30,8 @@ function App(props) {
             </div>
 
             <div className="header-links">
-            <ToggleButtonGroup value={currentScreen} onChange={(_, newValue) => handleChange(newValue)} aria-label="text formatting">
-                <ToggleButton value="home" style={{backgroundColor: 'gray'}}>
-                  Home
-                </ToggleButton>
-                <ToggleButton value="favorites" style={{backgroundColor: 'white'}}>
-                  Favorites
-                </ToggleButton>
-              </ToggleButtonGroup>
+              <Link to="/" >Home</Link>
+              <Link to="/favorites">Favorites</Link>
             </div>
           </header>
 

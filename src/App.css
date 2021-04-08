@@ -70,5 +70,23 @@ body {
   justify-content: space-between;
   height: 100%;
   text-align: center;
-  /* padding: 2rem; */
+}
+.cast-weather {
+  display: flex;
+  flex-direction: row;
+}
+.currentWeather {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.locationDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.clickable {
+  cursor: pointer;
 }
