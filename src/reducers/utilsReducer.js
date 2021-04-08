@@ -45,13 +45,13 @@ let initialState = {
             EpochDate: 1617854400,
             Temperature: {
               Minimum: {
-                Value: 56,
-                Unit: "F",
+                Value: 13.1,
+                Unit: "C",
                 UnitType: 18
               },
               Maximum: {
-                Value: 75,
-                Unit: "F",
+                Value: 24,
+                Unit: "C",
                 UnitType: 18
               }
             },
@@ -76,13 +76,13 @@ let initialState = {
             EpochDate: 1617940800,
             Temperature: {
               Minimum: {
-                Value: 55,
-                Unit: "F",
+                Value: 12.9,
+                Unit: "C",
                 UnitType: 18
               },
               Maximum: {
-                Value: 70,
-                Unit: "F",
+                Value: 20.8,
+                Unit: "C",
                 UnitType: 18
               }
             },
@@ -107,13 +107,13 @@ let initialState = {
             EpochDate: 1618027200,
             Temperature: {
               Minimum: {
-                Value: 57,
-                Unit: "F",
+                Value: 13.9,
+                Unit: "C",
                 UnitType: 18
               },
               Maximum: {
-                Value: 63,
-                Unit: "F",
+                Value: 17.1,
+                Unit: "C",
                 UnitType: 18
               }
             },
@@ -138,13 +138,13 @@ let initialState = {
             EpochDate: 1618113600,
             Temperature: {
               Minimum: {
-                Value: 55,
-                Unit: "F",
+                Value: 12.5,
+                Unit: "C",
                 UnitType: 18
               },
               Maximum: {
-                Value: 66,
-                Unit: "F",
+                Value: 18.7,
+                Unit: "C",
                 UnitType: 18
               }
             },
@@ -169,13 +169,13 @@ let initialState = {
             EpochDate: 1618200000,
             Temperature: {
               Minimum: {
-                Value: 52,
-                Unit: "F",
+                Value: 11,
+                Unit: "C",
                 UnitType: 18
               },
               Maximum: {
-                Value: 67,
-                Unit: "F",
+                Value: 19.3,
+                Unit: "C",
                 UnitType: 18
               }
             },

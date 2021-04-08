@@ -12,9 +12,10 @@ import { ACCUWEATHER_BASE_URL, API_KEY } from '../config';
 const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+    'Access-Control-Allow-Origin': 'http://127.0.0.1:3000/',
+    "Access-Control-Allow-Methods": "POST, GET",
+    "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+    'Access-Control-Allow-Credentials': 'true'
 }
 
 const getAutoComplete = (value) => async (dispatch) => {
@@ -56,7 +57,7 @@ const getForecast = (locationKey) => async (dispatch) => {
     dispatch({type: WEATHER_FORECAST});
 
     try {
-        let response = await fetch(ACCUWEATHER_BASE_URL + '/forecasts/v1/daily/5day/' + locationKey + "?apikey=" + API_KEY, {  
+        let response = await fetch(ACCUWEATHER_BASE_URL + '/forecasts/v1/daily/5day/' + locationKey + "?apikey=" + API_KEY + '&metric=true', {  
             method: 'GET',  
             headers: headers,
         });

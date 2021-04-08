@@ -47,7 +47,9 @@ body {
   background-color: red;
   
 }
-
+.home-root {
+  font-size: 2rem;
+}
 .forecast {
   display: flex;
   justify-content: center;
@@ -73,20 +75,46 @@ body {
 }
 .cast-weather {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .currentWeather {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  padding: 2rem 10rem;
+}
+.location-container {
+  display: flex;
+  flex-direction: row;
 }
 
 .locationDetails {
   display: flex;
   flex-direction: column;
+  text-align: left;
+  justify-content: center;
+  line-height: 3rem;
 }
 
 .clickable {
   cursor: pointer;
+}
+
+.cast-image{
+  height: 8rem;
+}
+
+.searchHeader {
+  display: flex;
+  padding: 2rem;
+  justify-content: center;
+}
+
+.searchBox {
+  border-radius: .5rem;
+  height: 3rem;
+  font-size: 2rem;
+  padding-left: .5rem;
 }
