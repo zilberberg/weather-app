@@ -118,3 +118,9 @@ body {
   font-size: 2rem;
   padding-left: .5rem;
 }
+
+.spinner {
+  justify-content: center;
+  text-align: center;
+  padding-top: 2rem;
+}
