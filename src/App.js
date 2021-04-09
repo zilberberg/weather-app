@@ -9,8 +9,9 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { makeStyles } from '@material-ui/core/styles';
-
-
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+ 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -21,13 +22,15 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     font: '1.6rem Helvetica',
-    padding: '1rem',
+    // padding: '1rem',
   }
 }));
 
 function App(props) {
   const [currentScreen, setScreen] = React.useState('home');
   const classes = useStyles();
+
+  const [theme, setTheme] = React.useState('Dark');
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -41,18 +44,38 @@ function App(props) {
 
   };
 
+  const handleThemeChange = () => {
+    if (theme == "Dark") {
+      setTheme("Light");
+    } else {
+      setTheme("Dark");
+    }
+  }
+
   return (
     <BrowserRouter>
       <ToastContainer />
-      <div className="grid-container">
+      <div className={"grid-container " + (theme == "Dark" ? "darkTheme" : "lightTheme")}>
           <header className="header">
             <div className="brand">
-              <Link to="/" >Weather app</Link>
+              <Link to="/">Weather app</Link>
+            </div>
+
+            <div>
+              <FormControlLabel
+                control={
+                  <Switch
+                    onChange={handleThemeChange}
+                    checked={theme == "Dark"}
+                    name="checkedB"
+                    color="primary"
+                  />
+                }
+                label={theme}
+              />
             </div>
 
             <div className="header-links">
-              {/* <Link to="/" >Home</Link>
-              <Link to="/favorites">Favorites</Link> */}
               
               <div className={classes.root}>
                 <ToggleButtonGroup
@@ -74,7 +97,7 @@ function App(props) {
           </header>
           
           <main className="main">
-              <div className="content">
+              <div className={"content"}>
 
                 <Route path="/" exact={true} component={HomeScreen}/>
                 <Route path="/favorites" exact={true} component={FavoritesScreen}/>
