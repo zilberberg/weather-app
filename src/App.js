@@ -11,6 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import { geoFindMe } from './actions/utilsActions';
+import Button from '@material-ui/core/Button';
  
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +24,11 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     font: '1.6rem Helvetica',
-    // padding: '1rem',
+    backgroundColor: '#fff',
+    padding: '.5rem',
+    '&:hover': {
+      
+    },
   }
 }));
 
@@ -52,6 +58,10 @@ function App(props) {
     }
   }
 
+  const foo = () => {
+    dispatch(geoFindMe());
+  }
+
   return (
     <BrowserRouter>
       <ToastContainer />
@@ -59,6 +69,10 @@ function App(props) {
           <header className="header">
             <div className="brand">
               <Link to="/">Weather app</Link>
+            </div>
+            
+            <div>
+              <Button className={classes.button} onClick={foo}>Geo Location</Button>
             </div>
 
             <div>

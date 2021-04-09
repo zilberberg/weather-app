@@ -29,7 +29,6 @@ function HomeScreen (props) {
     const anchorRef = React.useRef(null);
 
     useEffect(() => {
-        // dispatch(getCurrentWeather(TLV_KEY));
         if (prevOpen.current === true && open === false) {
             anchorRef.current.focus();
         }
@@ -49,9 +48,9 @@ function HomeScreen (props) {
     }
 
     const handleClose = (event) => {
-        // if (anchorRef.current && anchorRef.current.contains(event.target)) {
-        //   return;
-        // }
+        if (anchorRef.current && anchorRef.current.contains(event.target)) {
+          return;
+        }
     
         setOpen(false);
     };
@@ -76,13 +75,11 @@ function HomeScreen (props) {
     }
 
     const isLocationFavorite = () => {
-        // debugger
         if (items[locationDetails.Key]) {
             return true
         } else {
             return false
         }
-
     }
 
     const removeFavoriteHandler = () => {

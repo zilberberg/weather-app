@@ -73,5 +73,52 @@ const setLocation = (locationDetails) => (dispatch) => {
     dispatch({type: LOCATION_SET, payload: locationDetails})
 }
 
+const getLocation = (lon, lat) => async (dispatch) => {
 
-export { getAutoComplete, getCurrentWeather, getForecast, setLocation }
+    fetch(ACCUWEATHER_BASE_URL + '/locations/v1/cities/geoposition/search' + "?apikey=" + API_KEY + '&q=' + lon + '%2C' + lat, {  
+        method: 'GET',  
+        headers: headers,
+    }).then(function(response){
+        return response.json();
+      })
+    .then(function(myJson) {
+        dispatch(setLocation(myJson));
+        dispatch(getCurrentWeather(myJson.Key));
+        dispatch(getForecast(myJson.Key));
+
+    })
+    .catch((error) => {
+        toast(error.message);
+    })
+}
+
+
+const geoFindMe = () => (dispatch) => {
+
+    const status = document.querySelector('#status');
+    const mapLink = document.querySelector('#map-link');
+  
+    mapLink.href = '';
+    mapLink.textContent = '';
+  
+    function success(position) {
+        const latitude  = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        dispatch(getLocation(latitude, longitude));
+    }
+  
+    function error() {
+      status.textContent = 'Unable to retrieve your location';
+      toast('Unable to retrieve your location');
+    }
+  
+    if(!navigator.geolocation) {
+        toast('Geolocation is not supported by your browser');
+    } else {
+      navigator.geolocation.getCurrentPosition(success, error);
+    }
+  
+}
+
+export { getAutoComplete, getCurrentWeather, getForecast, setLocation, geoFindMe }
