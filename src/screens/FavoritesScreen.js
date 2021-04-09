@@ -1,11 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import { removeFavorite } from '../actions/favoritesActions';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        position: 'relative',
+        borderRadius: 90,
+      '& > *': {
+        margin: theme.spacing(0),
+        padding: 0,
+        minWidth: '3rem',
+        height: '3rem',
+        position: 'absolute',
+        right: '2rem',
+        borderRadius: 90,
+        border: '.2rem solid black',
+        backgroundColor: 'white'
+      },
+    },
+}));
 
 function FavoritesScreen (props) {
     const favorites = useSelector(state => state.favorites);
     const { items } = favorites;
     const dispatch = useDispatch();
+    const classes = useStyles();
 
     useEffect(() => {
         return () => {
@@ -13,9 +35,12 @@ function FavoritesScreen (props) {
         };
     }, [])
 
+    const deleteFavorite = (favoriteKey) => {
+        dispatch(removeFavorite(favoriteKey));
+    }
     return (
-        <div>
-            {
+        <div className={"favorites-root"}>
+            {/* {
                 Object.keys(items).map((key) => {
                     return (
                         <div key={key}>
@@ -23,7 +48,25 @@ function FavoritesScreen (props) {
                         </div>
                     )
                 })
-            }
+            } */}
+            <div className="tiles">
+                {Object.keys(items).map((key, index) => {
+                    return (
+                        <li key={index}>              
+                            <div className={classes.root}>
+                                <Button variant="contained" onClick={() => deleteFavorite(key)}>
+                                    X
+                                </Button>
+                            </div>                  
+                            <div className="cast">
+                                {items[key].LocalizedName}
+                                <div>{items[key].currentWeather.WeatherText}</div>
+                                <div>{items[key].currentWeather.Temperature.Metric.Value} C</div>
+                            </div>
+                        </li>
+                    )
+                })}
+            </div>
 
         </div>
     )

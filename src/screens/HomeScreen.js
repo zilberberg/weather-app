@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFavorite } from '../actions/favoritesActions';
+import { addFavorite, removeFavorite } from '../actions/favoritesActions';
 import { getAutoComplete, setLocation, getCurrentWeather, getForecast } from '../actions/utilsActions';
 import { TLV_KEY } from '../config';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
@@ -19,6 +19,10 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 function HomeScreen (props) {
     const utils = useSelector(state => state.utils);
     const { locationDetails, currentWeather, forecast, autocomplete, weatherLoading, forecastLoading, weatherError, forecastError } = utils;
+
+    const favorites = useSelector(state => state.favorites);
+    const { items } = favorites;
+
     const dispatch = useDispatch();
 
     const [open, setOpen] = React.useState(false);
@@ -34,7 +38,7 @@ function HomeScreen (props) {
     }, [open])
 
     const addFavoriteHandler = () => {
-        dispatch(addFavorite(locationDetails.Key, locationDetails));
+        dispatch(addFavorite(locationDetails.Key, locationDetails, currentWeather));
     }
 
     const searchLocations = (value) => {
@@ -69,6 +73,20 @@ function HomeScreen (props) {
         dispatch(getForecast(location.Key));
         dispatch(setLocation(location));
         handleClose();
+    }
+
+    const isLocationFavorite = () => {
+        // debugger
+        if (items[locationDetails.Key]) {
+            return true
+        } else {
+            return false
+        }
+
+    }
+
+    const removeFavoriteHandler = () => {
+        dispatch(removeFavorite(locationDetails.Key));
     }
       
     return (
@@ -114,20 +132,27 @@ function HomeScreen (props) {
                         </div>
                     </div>
                     
-
-                    <div className="clickable" onClick={addFavoriteHandler}>
-                        <Icon><FavoriteBorder style={{color: 'red', fontSize: '6rem'}}/></Icon>
-                    </div>
+                    {
+                        isLocationFavorite() ? 
+                        <div className="clickable" onClick={removeFavoriteHandler}>
+                            <Icon><Favorite style={{color: 'red', fontSize: '6rem'}}/></Icon>
+                        </div>
+                        : 
+                        <div className="clickable" onClick={addFavoriteHandler}>
+                            <Icon><FavoriteBorder style={{color: 'red', fontSize: '6rem'}}/></Icon>
+                        </div>
+                    }
+                    
                 </div>
             }
 
             {
                 forecastLoading ? <div className="spinner"><CircularProgress /></div> :    
                 forecast.length > 0 &&
-                <div className="forecast">
+                <div className="tiles">
                     {forecast.map((cast, index) => {
                         return (
-                            <li key={index}>
+                            <li className="tile" key={index}>
                                 <div className="cast">
                                     <Moment format="DD/MM" date={cast.Date} />
                                     <div className="cast-weather">
