@@ -13,6 +13,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { geoFindMe } from './actions/utilsActions';
 import Button from '@material-ui/core/Button';
+import {ThemeProvider} from "styled-components";
+import { GlobalStyles } from "./components/GlobalStyle";
+import { lightTheme, darkTheme } from "./components/Themes"
  
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,11 +28,13 @@ const useStyles = makeStyles((theme) => ({
   button: {
     font: '1.6rem Helvetica',
     backgroundColor: '#fff',
-    color: 'red',
     padding: '0',
     '&:hover': {
       
     },
+  },
+  toggle: {
+    color: 'red'
   }
 }));
 
@@ -37,7 +42,7 @@ function App(props) {
   const [currentScreen, setScreen] = React.useState('home');
   const classes = useStyles();
 
-  const [theme, setTheme] = React.useState('Dark');
+  const [theme, setTheme] = React.useState('dark');
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -48,15 +53,10 @@ function App(props) {
 
   const handleChange = (event, value) => {
     setScreen(value);
-
   };
 
   const handleThemeChange = () => {
-    if (theme == "Dark") {
-      setTheme("Light");
-    } else {
-      setTheme("Dark");
-    }
+    theme === 'light' ? setTheme('dark') : setTheme('light');
   }
 
   const foo = () => {
@@ -65,8 +65,10 @@ function App(props) {
 
   return (
     <BrowserRouter>
+      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <GlobalStyles/>
       <ToastContainer />
-      <div className={"grid-container " + (theme == "Dark" ? "darkTheme" : "lightTheme")}>
+      <div className={"grid-container"}>
           <header className="header">
             <div className="brand">
               <Link to="/">Weather app</Link>
@@ -76,17 +78,18 @@ function App(props) {
               <Button className={classes.button} onClick={foo}>Geo Location</Button>
             </div>
 
-            <div>
+            <div className={"toggle"}>
               <FormControlLabel
                 control={
                   <Switch
                     onChange={handleThemeChange}
-                    checked={theme == "Dark"}
+                    checked={theme == "dark"}
                     name="checkedB"
                     color="primary"
                   />
                 }
                 label={theme}
+                className={classes.toggle}
               />
             </div>
 
@@ -120,7 +123,7 @@ function App(props) {
               </div>              
           </main>
       </div>
-      
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

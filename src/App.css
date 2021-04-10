@@ -45,7 +45,7 @@ body {
 }
 
 .toggleBroon {
-  background-color: red;
+  /* background-color: red; */
   
 }
 .home-root {
@@ -66,7 +66,7 @@ body {
   height: 20rem;
   border: .1rem solid black;
   border-radius: 1rem;
-  transition: .2s ease-in;
+  transition: height .2s ease-in, flex .2s ease-in, font-size .2s ease-in;
 }
 .tiles li:hover {
   flex: 0 1 24rem;
@@ -146,55 +146,4 @@ body {
   max-width: 40px;
   height: 40px;
   padding: 0;
-}
-
-/* DARK THEME */
-.darkTheme {
-  background-color: #023047;
-  color: white;
-}
-
-.darkTheme .main {
-  color: white;
-}
-
-.darkTheme .header {
-  background-color: #bde0fe;
-  color: black;  
-}
-
-.darkTheme a{
-  color: #023047;
-}
-
-.darkTheme .brand a{
-  color: #023047;
-}
-
-.darkTheme .tiles li {
-  border-color: white;
-  background-color: #bde0fe;
-  color: #023047;
-}
-
-/* LIGHT THEME */
-.lightTheme {
-  background-color: #fff;
-  color: white;
-}
-
-.lightTheme .header {
-  background-color: #bde0fe;
-}
-
-.lightTheme a{
-  color: #023047;
-}
-
-.lightTheme .main {
-  color: #023047;
-}
-
-.lightTheme .tiles li {
-  background-color: #bde0fe;
 }
