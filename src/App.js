@@ -15,7 +15,8 @@ import { geoFindMe } from './actions/utilsActions';
 import Button from '@material-ui/core/Button';
 import {ThemeProvider} from "styled-components";
 import { GlobalStyles } from "./components/GlobalStyle";
-import { lightTheme, darkTheme } from "./components/Themes"
+import { lightTheme, darkTheme } from "./components/Themes";
+import { setScreen } from './actions/utilsActions';
  
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +40,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App(props) {
-  const [currentScreen, setScreen] = React.useState('home');
+  const utils = useSelector(state => state.utils);
+  const { screenName } = utils;
+
   const classes = useStyles();
 
   const [theme, setTheme] = React.useState('dark');
@@ -52,7 +55,7 @@ function App(props) {
   }, [])
 
   const handleChange = (event, value) => {
-    setScreen(value);
+    dispatch(setScreen(value));
   };
 
   const handleThemeChange = () => {
@@ -97,7 +100,7 @@ function App(props) {
               
               <div className={classes.root}>
                 <ToggleButtonGroup
-                  value={currentScreen}
+                  value={screenName}
                   exclusive
                   onChange={handleChange}
                   aria-label="text alignment"

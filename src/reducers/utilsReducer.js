@@ -7,7 +7,8 @@ import { LOCATION_SET,
     WEATHER_FORECAST_FAIL, 
     AUTOCOMPLETE_SUCCESS, 
     AUTOCOMPLETE_GET, 
-    AUTOCOMPLETE_FAIL } from "../constants/utilsConstants";
+    AUTOCOMPLETE_FAIL, 
+    SCREEN_NAME_SET} from "../constants/utilsConstants";
 import {savedData} from '../data';
 
 let initialState = {
@@ -19,7 +20,8 @@ let initialState = {
     forecastLoading: false,
     weatherError: null,
     forecastError: null,
-    autocompleteError: null
+    autocompleteError: null,
+    screenName: 'home',
 }
 function utilsReducer(state = {...initialState}, action) {
     switch (action.type) {
@@ -43,6 +45,8 @@ function utilsReducer(state = {...initialState}, action) {
             return {...state, autocomplete: []}
         case AUTOCOMPLETE_FAIL:
             return {...state, autocompleteError: action.payload}
+        case SCREEN_NAME_SET:
+            return {...state, screenName: action.payload}
         default:
             return state;
     }

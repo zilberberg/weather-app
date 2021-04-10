@@ -7,7 +7,8 @@ import { AUTOCOMPLETE_GET,
     WEATHER_GET_FAIL, 
     WEATHER_FORECAST_SUCCESS, 
     WEATHER_FORECAST_FAIL, 
-    LOCATION_SET } from '../constants/utilsConstants';
+    LOCATION_SET, 
+    SCREEN_NAME_SET } from '../constants/utilsConstants';
 import { ACCUWEATHER_BASE_URL, API_KEY } from '../config';
 import { toast } from 'react-toastify';
 
@@ -122,9 +123,13 @@ const geoFindMe = () => (dispatch) => {
 }
 
 const initFromFavorite = (location, weather, forecast) => (dispatch) => {
-    dispatch({type: LOCATION_SET, payload: location})
+    dispatch({type: LOCATION_SET, payload: location});
     dispatch({type: WEATHER_GET_SUCCESS, payload: weather});
     dispatch({type: WEATHER_FORECAST_SUCCESS, payload: forecast});
 }
 
-export { getAutoComplete, getCurrentWeather, getForecast, setLocation, geoFindMe, initFromFavorite }
+const setScreen = (screenName) => (dispatch) => {
+    dispatch({type: SCREEN_NAME_SET, payload: screenName})
+}
+
+export { getAutoComplete, getCurrentWeather, getForecast, setLocation, geoFindMe, initFromFavorite, setScreen }
