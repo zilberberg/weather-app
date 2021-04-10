@@ -116,13 +116,6 @@ const getLocation = (lon, lat) => async (dispatch) => {
 
 
 const geoFindMe = () => (dispatch) => {
-
-    const status = document.querySelector('#status');
-    const mapLink = document.querySelector('#map-link');
-  
-    mapLink.href = '';
-    mapLink.textContent = '';
-  
     function success(position) {
         const latitude  = position.coords.latitude;
         const longitude = position.coords.longitude;
@@ -131,7 +124,6 @@ const geoFindMe = () => (dispatch) => {
     }
   
     function error() {
-      status.textContent = 'Unable to retrieve your location';
       toast('Unable to retrieve your location');
     }
   
