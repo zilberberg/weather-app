@@ -8,7 +8,10 @@ import { AUTOCOMPLETE_GET,
     WEATHER_FORECAST_SUCCESS, 
     WEATHER_FORECAST_FAIL, 
     LOCATION_SET, 
-    SCREEN_NAME_SET } from '../constants/utilsConstants';
+    SCREEN_NAME_SET, 
+    LOCATION_GET, 
+    LOCATION_SUCCESS, 
+    LOCATION_FAIL } from '../constants/utilsConstants';
 import { ACCUWEATHER_BASE_URL, API_KEY } from '../config';
 import { toast } from 'react-toastify';
 
@@ -66,6 +69,24 @@ const getForecast = (locationKey) => async (dispatch) => {
     })
     .catch((error) => {
         dispatch({type: WEATHER_FORECAST_FAIL, payload: error.message});
+        toast(error.message);
+    })
+}
+
+const getLocationViaKey = (locationKey) => async (dispatch) => {
+    dispatch({type: LOCATION_GET});
+
+    fetch(ACCUWEATHER_BASE_URL + '/locations/v1/' + locationKey + "?apikey=" + API_KEY, {  
+        method: 'GET',  
+        headers: headers,
+    }).then(function(response){
+        return response.json();
+      })
+    .then(function(myJson) {
+        dispatch({type: LOCATION_SUCCESS, payload: myJson});
+    })
+    .catch((error) => {
+        dispatch({type: LOCATION_FAIL, payload: error.message});
         toast(error.message);
     })
 }
@@ -132,4 +153,4 @@ const setScreen = (screenName) => (dispatch) => {
     dispatch({type: SCREEN_NAME_SET, payload: screenName})
 }
 
-export { getAutoComplete, getCurrentWeather, getForecast, setLocation, geoFindMe, initFromFavorite, setScreen }
+export { getAutoComplete, getCurrentWeather, getForecast, setLocation, geoFindMe, initFromFavorite, setScreen, getLocationViaKey }

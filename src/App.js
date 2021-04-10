@@ -17,7 +17,9 @@ import {ThemeProvider} from "styled-components";
 import { GlobalStyles } from "./components/GlobalStyle";
 import { lightTheme, darkTheme } from "./components/Themes";
 import { setScreen } from './actions/utilsActions';
- 
+import { TLV_KEY } from './config';
+import { getLocationViaKey, getCurrentWeather, getForecast } from './actions/utilsActions';
+  
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -49,6 +51,11 @@ function App(props) {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    // get default tlv data
+    dispatch(getLocationViaKey(TLV_KEY));
+    dispatch(getCurrentWeather(TLV_KEY));
+    dispatch(getForecast(TLV_KEY));
+
     return () => {
         //
     };

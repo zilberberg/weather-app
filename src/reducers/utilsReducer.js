@@ -8,7 +8,8 @@ import { LOCATION_SET,
     AUTOCOMPLETE_SUCCESS, 
     AUTOCOMPLETE_GET, 
     AUTOCOMPLETE_FAIL, 
-    SCREEN_NAME_SET} from "../constants/utilsConstants";
+    SCREEN_NAME_SET, 
+    LOCATION_SUCCESS} from "../constants/utilsConstants";
 import {savedData} from '../data';
 
 let initialState = {
@@ -47,6 +48,8 @@ function utilsReducer(state = {...initialState}, action) {
             return {...state, autocompleteError: action.payload}
         case SCREEN_NAME_SET:
             return {...state, screenName: action.payload}
+        case LOCATION_SUCCESS:
+            return {...state, locationDetails: action.payload}
         default:
             return state;
     }
