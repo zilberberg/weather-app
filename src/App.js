@@ -25,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
   button: {
     font: '1.6rem Helvetica',
     backgroundColor: '#fff',
-    padding: '.5rem',
+    color: 'red',
+    padding: '0',
     '&:hover': {
       
     },
@@ -71,7 +72,7 @@ function App(props) {
               <Link to="/">Weather app</Link>
             </div>
             
-            <div>
+            <div className="custom-button">
               <Button className={classes.button} onClick={foo}>Geo Location</Button>
             </div>
 

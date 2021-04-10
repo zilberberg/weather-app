@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { removeFavorite } from '../actions/favoritesActions';
+import { initFromFavorite } from '../actions/utilsActions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,8 +18,14 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         right: '2rem',
         borderRadius: 90,
-        border: '.2rem solid black',
-        backgroundColor: 'white'
+        border: 'none',
+        backgroundColor: 'transparent',
+        fontSize: '2rem',
+        fontWeight: 'bold',
+        color: 'inherit',
+        '&:hover': {
+            
+        }
       },
     },
 }));
@@ -38,31 +45,33 @@ function FavoritesScreen (props) {
     const deleteFavorite = (favoriteKey) => {
         dispatch(removeFavorite(favoriteKey));
     }
+
+    const selectFavorite = (item) => {
+        let itemDetails = {...item};
+        delete itemDetails.currentWeather;
+        delete itemDetails.forecast;
+        dispatch(initFromFavorite(itemDetails, item.currentWeather, item.forecast));
+    }
+
     return (
         <div className={"favorites-root"}>
-            {/* {
-                Object.keys(items).map((key) => {
-                    return (
-                        <div key={key}>
-                            {items[key].LocalizedName}
-                        </div>
-                    )
-                })
-            } */}
             <div className="tiles">
                 {Object.keys(items).map((key, index) => {
                     return (
-                        <li key={index}>              
-                            <div className={classes.root}>
-                                <Button variant="contained" onClick={() => deleteFavorite(key)}>
-                                    X
-                                </Button>
-                            </div>                  
-                            <div className="cast">
-                                {items[key].LocalizedName}
-                                <div>{items[key].currentWeather.WeatherText}</div>
-                                <div>{items[key].currentWeather.Temperature.Metric.Value} C</div>
-                            </div>
+                        
+                        <li key={index}> 
+                            <Link key={index} style={{textDecoration: 'none'}} to="/" onClick={() => {selectFavorite(items[key])}}>          
+                                <div className={classes.root}>
+                                    <Button variant="contained" onClick={() => deleteFavorite(key)}>
+                                        X
+                                    </Button>
+                                </div>                  
+                                <div className="cast">
+                                    {items[key].LocalizedName}
+                                    <div>{items[key].currentWeather.WeatherText}</div>
+                                    <div>{items[key].currentWeather.Temperature.Metric.Value} C</div>
+                                </div>
+                            </Link>   
                         </li>
                     )
                 })}

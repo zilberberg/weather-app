@@ -121,4 +121,10 @@ const geoFindMe = () => (dispatch) => {
   
 }
 
-export { getAutoComplete, getCurrentWeather, getForecast, setLocation, geoFindMe }
+const initFromFavorite = (location, weather, forecast) => (dispatch) => {
+    dispatch({type: LOCATION_SET, payload: location})
+    dispatch({type: WEATHER_GET_SUCCESS, payload: weather});
+    dispatch({type: WEATHER_FORECAST_SUCCESS, payload: forecast});
+}
+
+export { getAutoComplete, getCurrentWeather, getForecast, setLocation, geoFindMe, initFromFavorite }

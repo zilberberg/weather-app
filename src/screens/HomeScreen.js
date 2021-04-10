@@ -15,6 +15,16 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: '20rem',
+      '& > *': {
+        
+      },
+    },
+}));
 
 function HomeScreen (props) {
     const utils = useSelector(state => state.utils);
@@ -27,6 +37,7 @@ function HomeScreen (props) {
 
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
+    const classes = useStyles();
 
     useEffect(() => {
         if (prevOpen.current === true && open === false) {
@@ -37,7 +48,7 @@ function HomeScreen (props) {
     }, [open])
 
     const addFavoriteHandler = () => {
-        dispatch(addFavorite(locationDetails.Key, locationDetails, currentWeather));
+        dispatch(addFavorite(locationDetails.Key, locationDetails, currentWeather, forecast));
     }
 
     const searchLocations = (value) => {
@@ -48,10 +59,6 @@ function HomeScreen (props) {
     }
 
     const handleClose = (event) => {
-        if (anchorRef.current && anchorRef.current.contains(event.target)) {
-          return;
-        }
-    
         setOpen(false);
     };
 
@@ -91,7 +98,7 @@ function HomeScreen (props) {
             <div className="searchHeader">
                 <input ref={anchorRef} className="searchBox" type="text" placeholder="Search location" onChange={(e) => searchLocations(e.target.value)}/>
 
-                <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                <Popper className={classes.root} open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
                         <Grow
                         {...TransitionProps}
@@ -103,7 +110,7 @@ function HomeScreen (props) {
                                 {
                                     autocomplete.map((location, index) => {
                                         return (
-                                            <MenuItem key={index} onClick={() => selectLocation(location)}>{location.LocalizedName}</MenuItem>
+                                            <MenuItem key={index} style={{fontSize: '2rem'}} onClick={() => selectLocation(location)}>{location.LocalizedName}</MenuItem>
                                         )
                                     })
                                 }

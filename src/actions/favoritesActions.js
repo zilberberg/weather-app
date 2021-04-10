@@ -1,7 +1,7 @@
 import { FAVORITE_ADD, FAVORITE_DELETE, FAVORITES_RESET } from '../constants/favoritesConstants';
 
-const addFavorite = (locationID, locationDetails, currentWeather) => (dispatch) => {
-    dispatch({type: FAVORITE_ADD, payload: {locationID, locationDetails, currentWeather}});
+const addFavorite = (locationID, locationDetails, currentWeather, forecast) => (dispatch) => {
+    dispatch({type: FAVORITE_ADD, payload: {locationID, locationDetails, currentWeather, forecast}});
 }
 
 const removeFavorite = (favoriteID) => (dispatch) => {

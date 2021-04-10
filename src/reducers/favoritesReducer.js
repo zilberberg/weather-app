@@ -9,6 +9,7 @@ function favoritesReducer(state = {...initialState}, action) {
         case FAVORITE_ADD:
             newItems[action.payload.locationID] = action.payload.locationDetails;
             newItems[action.payload.locationID]["currentWeather"] = action.payload.currentWeather;
+            newItems[action.payload.locationID]["forecast"] = action.payload.forecast;
             return {...state, items: newItems}
         case FAVORITE_DELETE:
             delete newItems[action.payload];
